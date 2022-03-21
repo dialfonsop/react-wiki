@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap";
 import Cards from "./components/Cards/Cards";
+import CardDetails from "./components/Cards/CardDetails";
 import Filters from "./components/Filters/Filters";
 import Pagination from "./components/Pagination/Pagination";
 import Search from "./components/Search/Search";
@@ -20,8 +21,13 @@ function App() {
 
       <Routes>
         <Route path="/" element={<Home/>}/>
+        <Route path="/:id" element={<CardDetails/>}/>
+
         <Route path="/episodes" element={<Episodes/>}/>
+        <Route path="/episodes/:id" element={<CardDetails/>}/>
+
         <Route path="/location" element={<Location/>}/>
+        <Route path="/location/:id" element={<CardDetails/>}/>
       </Routes>
     </Router>
   );
@@ -48,6 +54,7 @@ const Home = () => {
 
   return (
     <div className="App">
+      <h1 className="text-center mb-4"> Characters </h1>
       <Search setPageNumber={setPageNumber} setSearch={setSearch} />
 
       <div className="container">
@@ -58,9 +65,9 @@ const Home = () => {
             setStatus={setStatus}
             setPageNumber={setPageNumber}
           />
-          <div className="col-8">
+          <div className="col-lg-8 col-12">
             <div className="row">
-              <Cards results={results} />
+              <Cards page="/" results={results} />
             </div>
           </div>
         </div>
